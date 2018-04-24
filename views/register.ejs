@@ -1,0 +1,18 @@
+<% include ./partials/header %>
+<div class="container mt-4">
+  <h1 class="text-center">Create account:</h1>
+  <div class="row justify-content-center py-4">
+    <form class="form col-md-3" action="/register" method="post">
+      <fieldset class="form-group">
+        <label for="username">Username: </label>
+        <input class="form-control" type="text" name="username" placeholder="Username.." id="username">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="imgUrl">Password: </label>
+        <input class="form-control" type="password" name="password" placeholder="Password.." id="password">
+      </fieldset>
+      <input class="btn btn-dark" type="submit" value="Create">
+    </form>
+  </div>
+</div>
+<% include ./partials/footer %>

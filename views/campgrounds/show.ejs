@@ -1,0 +1,36 @@
+<% include ../partials/header %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-6 show-info">
+      <img class="img-fluid show-img" src="<%= camp.imageURL %>" alt="Image of campground">
+    </div>
+    <div class="col-lg-6 show-info">
+      <h2><%= camp.name %></h2>
+      <div class="lead">
+      <%= camp.description %>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 show-info">
+    <p><a class="btn btn-primary" href="/camps/<%= camp._id %>/comments/new" role="button">Add new comment</a></p>
+    <hr>
+    <ul class="list-unstyled">
+      <% camp.comments.forEach((comment) => { %>
+        <li class="media mb-3">
+          <img class="mr-3" src="" alt="Generic placeholder image">
+          <div class="media-body">
+            <h6 class="mt-0 mb-1 d-inline-block"><em><%= comment.author %></em></h6>
+            <h6 class="mt-0 mb-1 d-inline-block float-right"><em>2 days ago</em></h6>
+            <p class="mb-0 lead"><%= comment.text %></p>
+          </div>
+        </li>
+      <% }); %>
+    </ul>
+
+
+  </div>
+</div>
+
+
+
+<% include ../partials/footer %>

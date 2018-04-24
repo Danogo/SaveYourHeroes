@@ -1,0 +1,18 @@
+<% include ../partials/header %>
+<div class="container mt-4">
+  <h1 class="text-center">Add new comment to <%= camp.name %></h1>
+  <div class="row justify-content-center py-4">
+    <form class="form col-md-3" action="/camps/<%= camp._id %>/comments" method="post">
+      <fieldset class="form-group">
+        <label for="author">Author: </label>
+        <input class="form-control" type="text" name="comment[author]" placeholder="Author name.." id="author">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="content">Comment text: </label>
+        <textarea class="form-control" name="comment[text]" id="content" placeholder="I love it! :)"></textarea>
+      </fieldset>
+      <input class="btn btn-dark" type="submit" value="Add comment">
+    </form>
+  </div>
+</div>
+<% include ../partials/footer %>

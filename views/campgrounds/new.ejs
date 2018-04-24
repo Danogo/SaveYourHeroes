@@ -1,0 +1,22 @@
+<% include ../partials/header %>
+<div class="container mt-4">
+  <h1 class="text-center">Create new camp:</h1>
+  <div class="row justify-content-center py-4">
+    <form class="form col-md-3" action="/camps" method="post">
+      <fieldset class="form-group">
+        <label for="name">Camp name: </label>
+        <input class="form-control" type="text" name="name" placeholder="Name.." id="name">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="imgUrl">Image URL: </label>
+        <input class="form-control" type="text" name="url" placeholder="Image url.." id="imgUrl">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="description">Camp description: </label>
+        <textarea class="form-control" name="description" id="description"></textarea>
+      </fieldset>
+      <input class="btn btn-dark" type="submit" value="Create">
+    </form>
+  </div>
+</div>
+<% include ../partials/footer %>

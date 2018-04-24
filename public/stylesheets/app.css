@@ -1,0 +1,27 @@
+.show-info {
+  margin-top: 1em;
+}
+
+.show-img {
+  width: 100%;
+}
+
+.card {
+  border: none;
+}
+
+.card-body {
+  background-color: #EEE;
+}
+
+@media (min-width: 575.98px) {
+  .card-columns {
+  column-count: 2;
+  }
+}
+
+@media (min-width: 992px) {
+  .card-columns {
+  column-count: 4;
+  }
+}
