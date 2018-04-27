@@ -51,16 +51,6 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 //=== Middlewares ===
-//middleware checking if user is logged in
-const isLoggedIn = (req, res, next) => {
-  //check if request is authenticated using passport method
-  if (req.isAuthenticated()) {
-    return next();
-  } else {
-    //if not redirect to login
-    res.redirect('/login');
-  }
-};
 //using middleware which allows to access data about
 //user in every template, so we don't need to pass req.user everywhere
 //we can just use currentUser in template

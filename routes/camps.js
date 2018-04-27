@@ -1,46 +1,8 @@
 const express = require('express'),
       Camp    = require('../models/camp'),
+      //automatically looking for index.js file in folder
+      middleware = require('../middleware'),
       router  = express.Router();
-
-//=== Middlewares ===
-//middleware checking if user is logged in, AUTHENTICATION
-const isLoggedIn = (req, res, next) => {
-  //check if request is authenticated using passport method
-  if (req.isAuthenticated()) {
-    return next();
-  } else {
-    //if not redirect to login
-    res.redirect('/login');
-  }
-};
-//middleware checking if user is logged in and owns particular campground, AUTHORIZATION
-const checkCampOwnership = (req, res, next) => {
-  //if user is logged in
-  if (req.isAuthenticated()) {
-    //find camp to compare author.id with logged user's _id
-    Camp.findById(req.params.id, (err, foundCamp) => {
-      if (err) {
-        console.log(err);
-        //redirect to where user came from
-        res.redirect('back');
-      } else {
-        //check if logged in user owns showed campground
-        //equality comparison(=== or ==) doesn't work because author.id is mongoose object and user._id is a string
-        //therefore equals() method is used
-        if (foundCamp.author.id.equals(req.user._id)) {
-            //if ids are equal move on to next callback function
-            next();
-        } else {
-          //redirect to where user came from
-          res.redirect('back');
-        }
-      }
-    });
-  } else {
-    //if user is not logged in redirect to where user came from
-    res.redirect('back');
-  }
-};
 
 // === Routes ===
 
@@ -58,7 +20,7 @@ router.get('/', (req, res) => {
 });
 
 //handling POST request for camps route, CREATE - adding new campground ot DB
-router.post('/', isLoggedIn, (req, res) => {
+router.post('/', middleware.isLoggedIn, (req, res) => {
   //grab data from form
   let name = req.body.name;
   let url = req.body.url;
@@ -82,7 +44,7 @@ router.post('/', isLoggedIn, (req, res) => {
 });
 
 //handling GET request for camps/new route, NEW - show form to create new campground
-router.get('/new', isLoggedIn, (req, res) => {
+router.get('/new', middleware.isLoggedIn, (req, res) => {
   res.render('campgrounds/new');
 });
 
@@ -100,14 +62,14 @@ router.get('/:id', (req, res) => {
 });
 
 //handling GET request to /camps/:id/edit, EDIT - edit details about particular camp
-router.get('/:id/edit', checkCampOwnership, (req, res) => {
+router.get('/:id/edit', middleware.checkCampOwnership, (req, res) => {
   Camp.findById(req.params.id, (err, foundCamp) => {
       res.render('campgrounds/edit', {camp: foundCamp});
   });
 });
 
 //handling PUT request to /camps/:id, UPDATE - update details about selected camp
-router.put('/:id', checkCampOwnership, (req, res) => {
+router.put('/:id', middleware.checkCampOwnership, (req, res) => {
   Camp.findByIdAndUpdate(req.params.id, req.body.camp, (err, updatedCamp) => {
     if (err) {
       console.log(err);
@@ -119,7 +81,7 @@ router.put('/:id', checkCampOwnership, (req, res) => {
 });
 
 //handling DELETE request to /camps/:id, DESTROY - remove particular campground from database
-router.delete('/:id', checkCampOwnership, (req, res) => {
+router.delete('/:id', middleware.checkCampOwnership, (req, res) => {
   Camp.findByIdAndRemove(req.params.id, (err) => {
     if (err) {
       console.log(err);
