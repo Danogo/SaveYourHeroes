@@ -9,6 +9,15 @@
       <div class="lead">
       <%= camp.description %>
       </div>
+      <p>Created by <%= camp.author.username %></p>
+      <% if (currentUser && camp.author.id.equals(currentUser._id)) { %>
+      <div class="btn-group" role="group" aria-label="Edit and delete buttons">
+        <a class="btn btn-warning" href="/camps/<%= camp._id %>/edit" role="button">Edit</a>
+        <form class="form d-inline-block " action="/camps/<%= camp._id %>?_method=DELETE" method="post">
+          <button class="btn btn-danger dlt-btn">Delete</button>
+        </form>
+      </div>
+      <% } %>
     </div>
   </div>
   <div class="show-info">
@@ -19,9 +28,17 @@
         <li class="media comment mb-3">
           <img class="mr-3" src="" alt="Generic placeholder image">
           <div class="media-body">
-            <h6 class="mt-0 mb-1 d-inline-block"><em><%= comment.author %></em></h6>
+            <h6 class="mt-0 mb-1 d-inline-block"><em><%= comment.author.username %></em></h6>
             <h6 class="mt-0 mb-1 d-inline-block float-right"><em>2 days ago</em></h6>
             <p class="mb-0 lead"><%= comment.text %></p>
+            <% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
+            <div class="btn-group" role="group" aria-label="Edit and delete buttons">
+              <a class="btn btn-warning btn-sm" href="/camps/<%= camp._id %>/comments/<%= comment._id %>/edit" role="button">Edit</a>
+              <form class="form d-inline-block " action="/camps/<%= camp._id %>/comments/<%= comment._id %>?_method=DELETE" method="post">
+                <button class="btn btn-danger btn-sm dlt-btn">Delete</button>
+              </form>
+            </div>
+            <% } %>
           </div>
         </li>
       <% }); %>

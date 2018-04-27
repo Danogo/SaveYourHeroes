@@ -1,7 +1,7 @@
 <% include ../partials/header %>
 <div class="container">
   <header class="jumbotron bg-transparent">
-    <h1 class="display-4">Hello, travellers! </h1>
+    <h1 class="display-4">Hello, <%= currentUser ? currentUser.username : 'travellers' %>!</h1>
     <p class="lead">Here you can see some awesome campgrounds or even add your favorite places and share them with others.</p>
     <hr class="my-3">
     <p>Go ahead and show us your favorite campground.</p>
@@ -13,7 +13,7 @@
             <img src="<%= camp.imageURL %>" class="card-img-top" alt="Camp card image">
             <div class="card-body">
               <h5 class="card-title mb-2"><%= camp.name %></h5>
-              <p class="card-text"><%= camp.description.substring(0, 100)%>...</p>
+              <p class="card-text"><%= camp.description.substring(0, 75)%>...</p>
             </div>
             <div class="card-footer">
                 <a class="btn btn-info btn-sm" href="/camps/<%= camp._id %>" role="button">More Info</a>

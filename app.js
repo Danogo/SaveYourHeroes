@@ -2,6 +2,7 @@
 // Loading modules (and models) and setting them up
 // ================================================
 const express       = require('express'),
+      mtdOverride   = require('method-override'),
       app           = express(),
       session       = require('express-session'),
       mongoose      = require('mongoose'),
@@ -9,8 +10,8 @@ const express       = require('express'),
       LocalStrategy = require('passport-local'),
       Camp          = require('./models/camp'),
       Comment       = require('./models/comment'),
-      User          = require('./models/user'),
-      seedDB        = require('./seedDB');
+      User          = require('./models/user');
+      // seedDB        = require('./seedDB');
 
 // === Importing routes ===
 const campsRoutes    = require('./routes/camps'),
@@ -26,9 +27,12 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: true}));
 //add middleware which sets public folder for external static assets
 app.use(express.static(__dirname + '/public'));
+//add middleware which lets to use such HTTP verbs as PUT or DELETE
+//override with POST having ?_method=DELETE or ?_method=PUT in query value
+app.use(mtdOverride('_method'));
 //connect mongoose to mongodb,connect directly to yelp_camp db(or create first and then bind if didn't find one)
 mongoose.connect('mongodb://localhost/yelp_camp');
-seedDB();
+// seedDB();
 
 //=== Config for AUTH ===
 //use express-session
@@ -57,8 +61,9 @@ const isLoggedIn = (req, res, next) => {
     res.redirect('/login');
   }
 };
-//use middleware which allows to access data about
-//user in every template, so we don't need to pass it everywhere
+//using middleware which allows to access data about
+//user in every template, so we don't need to pass req.user everywhere
+//we can just use currentUser in template
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   next();

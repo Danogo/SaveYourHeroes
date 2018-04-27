@@ -1,0 +1,22 @@
+<% include ../partials/header %>
+<div class="container mt-4">
+  <h1 class="text-center">Edit <%= camp.name %></h1>
+  <div class="row justify-content-center py-4">
+    <form class="form col-md-3" action="/camps/<%= camp._id %>?_method=PUT" method="post">
+      <fieldset class="form-group">
+        <label for="name">Camp name: </label>
+        <input class="form-control" type="text" name="camp[name]" value="<%= camp.name %>" id="name">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="imgUrl">Image URL: </label>
+        <input class="form-control" type="text" name="camp[imageURL]" value="<%= camp.imageURL %>" id="imgUrl">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="description">Camp description: </label>
+        <textarea class="form-control" name="camp[description]" id="description"><%= camp.description %></textarea>
+      </fieldset>
+      <input class="btn btn-dark" type="submit" value="Confirm">
+    </form>
+  </div>
+</div>
+<% include ../partials/footer %>

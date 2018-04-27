@@ -1,0 +1,14 @@
+<% include ../partials/header %>
+<div class="container mt-4">
+  <h1 class="text-center">Edit comment about campground</h1>
+  <div class="row justify-content-center py-4">
+    <form class="form col-md-3" action="/camps/<%= campId %>/comments/<%= comment._id %>?_method=PUT" method="post">
+      <fieldset class="form-group">
+        <label for="content">Comment text: </label>
+        <textarea class="form-control" name="comment[text]" id="content" value="<%= comment.text %>"></textarea>
+      </fieldset>
+      <input class="btn btn-dark" type="submit" value="Confirm">
+    </form>
+  </div>
+</div>
+<% include ../partials/footer %>
