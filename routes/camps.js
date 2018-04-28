@@ -52,8 +52,13 @@ router.get('/new', middleware.isLoggedIn, (req, res) => {
 router.get('/:id', (req, res) => {
   let campId = req.params.id;
   Camp.findById(campId).populate('comments').exec((err, foundCamp) => {
-    if (err) {
+    //handling error if id is invalid(has different length) or if is valid but returns null/undefined (rare case, url tinkering)
+    //to prevent application crush
+    if (err || !foundCamp) {
       console.log(err);
+      //display error message to user
+      req.flash('error', 'Campground not found');
+      res.redirect('back');
     } else {
       //render show template and pass value of found camp to it
       res.render('campgrounds/show', {camp: foundCamp});

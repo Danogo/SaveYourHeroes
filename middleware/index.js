@@ -12,7 +12,7 @@ middlewareObj.isLoggedIn = (req, res, next) => {
   } else {
     //if not - display prepare flash message
     //and redirect to login
-    req.flash('errorMsg', 'You have to login to do that.');
+    req.flash('error', 'You need to be logged in to do that.');
     res.redirect('/login');
   }
 };
@@ -23,8 +23,12 @@ middlewareObj.checkCampOwnership = (req, res, next) => {
   if (req.isAuthenticated()) {
     //find camp to compare author.id with logged user's _id
     Camp.findById(req.params.id, (err, foundCamp) => {
-      if (err) {
+      //handling error if id is invalid(has different length) or if is valid but returns null/undefined(rare case, url tinkering)
+      //to prevent application crush
+      if (err || !foundCamp) {
         console.log(err);
+        //display error to user
+        req.flash('error', 'Campground not found');
         //redirect to where user came from
         res.redirect('back');
       } else {
@@ -35,12 +39,16 @@ middlewareObj.checkCampOwnership = (req, res, next) => {
             //if ids are equal move on to next callback function
             next();
         } else {
+          //display message if user doesn't own campground (in case of outside browser requests)
+          req.flash('error', 'You don\'t have permission to do that');
           //redirect to where user came from
           res.redirect('back');
         }
       }
     });
   } else {
+    //display message if user is not logged in
+    req.flash('error', 'You need to be logged in to do that');
     //if user is not logged in redirect to where user came from
     res.redirect('back');
   }
@@ -52,8 +60,12 @@ middlewareObj.checkCommentOwnership = (req, res, next) => {
   if (req.isAuthenticated()) {
     //find comment to compare author.id with logged user's _id
     Comment.findById(req.params.comment_id, (err, foundComment) => {
-      if (err) {
+      //handling error if id is invalid(has different length) or if is valid but returns null/undefined (rare case, url tinkering)
+      //to prevent application crush
+      if (err || !foundComment) {
         console.log(err);
+        //display error message to user
+        req.flash('error', 'Comment not found');
         //redirect to where user came from
         res.redirect('back');
       } else {
@@ -64,12 +76,16 @@ middlewareObj.checkCommentOwnership = (req, res, next) => {
             //if ids are equal move on to next callback function
             next();
         } else {
+          //display message if user doesn't own comment (in case of outside browser requests)
+          req.flash('error', 'You don\'t have permission to do that');
           //redirect to where user came from
           res.redirect('back');
         }
       }
     });
   } else {
+    //display message if user is not logged in
+    req.flash('error', 'You need to be logged in to do that');
     //if user is not logged in redirect to where user came from
     res.redirect('back');
   }

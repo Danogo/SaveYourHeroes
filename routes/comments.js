@@ -10,8 +10,10 @@ const express = require('express'),
 //NEW - display form for creating new comments
 router.get('/new', middleware.isLoggedIn, (req, res) => {
     Camp.findById(req.params.id, (err, foundCamp) => {
-      if (err) {
+      if (err || !foundCamp) {
         console.log(err);
+        req.flash('error', 'Campground not found. You cannot add comment to non-existing campground');
+        res.redirect('back');
       } else {
         res.render('comments/new', {camp: foundCamp});
       }
@@ -51,17 +53,25 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
 
 //EDIT - show form to edit existing comment
 router.get('/:comment_id/edit', middleware.checkCommentOwnership, (req, res) => {
-  //find comment based on params in query string
-  Comment.findById(req.params.comment_id, (err, foundComment) => {
-    if (err) {
-      //if camp wasn't found
+  //first check if campground exists (in case of url tinkering)
+  Camp.findById(req.params.id, (err, foundCamp) => {
+    if (err || !foundCamp) {
       console.log(err);
-      //take user back to show page
-      res.redirect('back');
-    } else {
-      //otherwise display form to edit particular comment
-      res.render('comments/edit', {campId: req.params.id, comment: foundComment});
+      req.flash('error', 'Campground not found. You cannot edit comment about non-existing campground');
+      return res.redirect('back');
     }
+    //find comment based on params in query string
+    Comment.findById(req.params.comment_id, (err, foundComment) => {
+      if (err) {
+        //if camp wasn't found
+        console.log(err);
+        //take user back to show page
+        res.redirect('back');
+      } else {
+        //otherwise display form to edit particular comment
+        res.render('comments/edit', {campId: req.params.id, comment: foundComment});
+      }
+    });
   });
 });
 

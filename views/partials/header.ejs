@@ -36,3 +36,16 @@
         </ul>
       </div>
     </nav>
+    <!-- flash message -->
+    <div class="container">
+      <% if (successMsg && successMsg.length > 0) { %>
+        <div class="alert alert-success" role="alert">
+          <%= successMsg %>
+        </div>
+      <% } %>
+      <% if (errorMsg && errorMsg.length > 0) { %>
+        <div class="alert alert-danger" role="alert">
+          <%= errorMsg %>
+        </div>
+      <% } %>
+    </div>

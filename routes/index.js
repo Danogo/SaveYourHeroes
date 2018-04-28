@@ -24,7 +24,8 @@ router.post('/register', (req, res) => {
   User.register(new User({username: req.body.username}), req.body.password, (err, user) => {
     if (err) {
       console.log(err);
-      return res.render('register');
+      //display proper message(coming from mongoose object) about occuring problem
+      return res.render('register', {errorMsg: err.message});
     } //auth of a user, try to login (authenticate also invokes req.login under the hood)
       passport.authenticate('local')(req, res, () => res.redirect("/camps"));
   })
@@ -32,7 +33,7 @@ router.post('/register', (req, res) => {
 
 //handling GET request for /login route, NEW - display form to log in
 router.get('/login', (req, res) => {
-  res.render('login', {flashMsg: req.flash('errorMsg')});
+  res.render('login');
 });
 
 //handling POST request for /login route, login logic
@@ -43,6 +44,7 @@ router.post('/login', passport.authenticate('local', {
 
 //handling get request for /logout route, logoute logic
 router.get('/logout', (req, res) => {
+  req.flash('success', 'You have been logged out successfully!');
   req.logout();
   res.redirect('/');
 });
