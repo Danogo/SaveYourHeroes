@@ -32,7 +32,7 @@ router.post('/register', (req, res) => {
 
 //handling GET request for /login route, NEW - display form to log in
 router.get('/login', (req, res) => {
-  res.render('login');
+  res.render('login', {flashMsg: req.flash('errorMsg')});
 });
 
 //handling POST request for /login route, login logic

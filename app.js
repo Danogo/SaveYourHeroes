@@ -5,6 +5,7 @@ const express       = require('express'),
       mtdOverride   = require('method-override'),
       app           = express(),
       session       = require('express-session'),
+      flash         = require('connect-flash'),
       mongoose      = require('mongoose'),
       passport      = require('passport'),
       LocalStrategy = require('passport-local'),
@@ -41,6 +42,8 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
+//use connect-flash package for flash messages
+app.use(flash());
 //set initialization and handling persistent login sessions using passport methods as middlewares
 app.use(passport.initialize());
 app.use(passport.session());
