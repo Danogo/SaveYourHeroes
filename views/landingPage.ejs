@@ -1,9 +1,26 @@
-<% include partials/header %>
-<div class="container mt-4">
-  <header class="jumbotron">
-    <h1 class="display-4 mb-5">Welcome to the site. This is Home Page.</h1>
-    <a class="btn btn-outline-primary" href="/camps" role="button">Go to the campgrounds</a>
-  </header>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Camps everywhere!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/app.css">
+    <link rel="stylesheet" href="/stylesheets/landing.css">
+  </head>
+  <body>
+
+<div id="landing-header">
+  <h1>Welcome to YelpCamp!</h1>
+  <a href="/camps" class="btn btn-lg btn-success">View All Campgrounds</a>
 </div>
-<footer class="text-center">Daniel Ogonowski 2018 &copy;</footer>
-<% include partials/footer %>
+
+<ul class="slideshow">
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+</ul>
+<script src="public\scripts\modernizr-custom.js"></script>
+<% include ./partials/footer %>

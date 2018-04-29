@@ -7,9 +7,9 @@
     <p>Go ahead and show us your favorite campground.</p>
     <a class="btn btn-outline-primary btn-bg" href="/camps/new" role="button">Create new camp</a>
   </header>
-    <div class="card-columns">
+    <div class="row">
         <% camps.forEach((camp) => { %>
-          <div class="card">
+          <div class="card col-sm-6 col-lg-4 mb-4">
             <img src="<%= camp.imageURL %>" class="card-img-top" alt="Camp card image">
             <div class="card-body">
               <h5 class="card-title mb-2"><%= camp.name %></h5>

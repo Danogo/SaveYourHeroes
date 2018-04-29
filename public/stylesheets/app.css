@@ -19,14 +19,6 @@
   border-bottom-left-radius: 0;
 }
 
-@media (min-width: 575.98px) {
-  .card-columns {
-  column-count: 2;
-  }
-}
-
-@media (min-width: 992px) {
-  .card-columns {
-  column-count: 4;
-  }
+.media-body {
+  background-color: #EEE;
 }
