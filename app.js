@@ -32,9 +32,9 @@ app.use(express.static(__dirname + '/public'));
 //override with POST having ?_method=DELETE or ?_method=PUT in query value
 app.use(mtdOverride('_method'));
 //connect mongoose to mongodb,connect directly to yelp_camp db(or create first and then bind if didn't find one)
-//mongodb://daniel:skilledpro@ds263109.mlab.com:63109/savethehero
 //mongodb://localhost/yelp_camp
-mongoose.connect('mongodb://daniel:skilledpro@ds263109.mlab.com:63109/savethehero');
+let dbUrl = process.env.DATABASEURL || 'mongodb://localhost/savethehero';
+mongoose.connect(dbUrl);
 // seedDB();
 
 //=== Config for AUTH ===
