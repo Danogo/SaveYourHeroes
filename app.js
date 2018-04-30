@@ -32,7 +32,9 @@ app.use(express.static(__dirname + '/public'));
 //override with POST having ?_method=DELETE or ?_method=PUT in query value
 app.use(mtdOverride('_method'));
 //connect mongoose to mongodb,connect directly to yelp_camp db(or create first and then bind if didn't find one)
-mongoose.connect('mongodb://localhost/yelp_camp');
+//mongodb://daniel:skilledpro@ds263109.mlab.com:63109/savethehero
+//mongodb://localhost/yelp_camp
+mongoose.connect('mongodb://daniel:skilledpro@ds263109.mlab.com:63109/savethehero');
 // seedDB();
 
 //=== Config for AUTH ===
@@ -72,4 +74,4 @@ app.use('/', indexRoutes);
 app.use('/camps/:id/comments', commentsRoutes);
 
 //=== Starting the server ===
-app.listen(process.env.PORT, process.env.IP, () => console.log('Server is listening on port 3000..'));
+app.listen(process.env.PORT, process.env.IP, () => console.log('The savethehero server has started...'));
