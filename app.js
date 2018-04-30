@@ -31,11 +31,9 @@ app.use(express.static(__dirname + '/public'));
 //add middleware which lets to use such HTTP verbs as PUT or DELETE
 //override with POST having ?_method=DELETE or ?_method=PUT in query value
 app.use(mtdOverride('_method'));
-//connect mongoose to mongodb,connect directly to yelp_camp db(or create first and then bind if didn't find one)
-//mongodb://localhost/yelp_camp
+//connect mongoose to mongodb using environment variable or connect to default local mongodb (or create first and then connect if didn't find one)
 const dbUrl = process.env.DATABASEURL || 'mongodb://localhost/savethehero';
 mongoose.connect(dbUrl);
-// seedDB();
 
 //=== Config for AUTH ===
 //use express-session
