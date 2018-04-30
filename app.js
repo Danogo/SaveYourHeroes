@@ -33,7 +33,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(mtdOverride('_method'));
 //connect mongoose to mongodb,connect directly to yelp_camp db(or create first and then bind if didn't find one)
 //mongodb://localhost/yelp_camp
-let dbUrl = process.env.DATABASEURL || 'mongodb://localhost/savethehero';
+const dbUrl = process.env.DATABASEURL || 'mongodb://localhost/savethehero';
 mongoose.connect(dbUrl);
 // seedDB();
 
