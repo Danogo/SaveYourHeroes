@@ -72,4 +72,4 @@ app.use('/', indexRoutes);
 app.use('/camps/:id/comments', commentsRoutes);
 
 //=== Starting the server ===
-app.listen(3000, () => console.log('Server is listening on port 3000..'));
+app.listen(process.env.PORT, process.env.IP, () => console.log('Server is listening on port 3000..'));
