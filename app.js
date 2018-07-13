@@ -72,4 +72,4 @@ app.use('/', indexRoutes);
 app.use('/camps/:id/comments', commentsRoutes);
 
 //=== Starting the server ===
-app.listen(process.env.PORT, process.env.IP, () => console.log('The savethehero server has started...'));
+app.listen(process.env.PORT || 3000, process.env.IP, () => console.log('The savethehero server has started...'));
