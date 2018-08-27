@@ -52,7 +52,7 @@ const seedDB = () => {
                         //create a comment
                         Comment.create(
                             {
-                                text: "This place is great, but I wish there was internet",
+                                text: "My favorite hero of all time!",
                                 author: "Homer"
                             }, (err, comment) => {
                                 if(err){
