@@ -1,10 +1,10 @@
 <% include ../partials/header %>
 <div class="container mt-4">
-  <h1 class="text-center">Create new camp:</h1>
+  <h1 class="text-center">Create new hero:</h1>
   <div class="row justify-content-center py-4">
-    <form class="form col-md-3" action="/camps" method="post">
+    <form class="form col-md-3" action="/heroes" method="post">
       <fieldset class="form-group">
-        <label for="name">Camp name: </label>
+        <label for="name">Hero name: </label>
         <input class="form-control" type="text" name="name" placeholder="Name.." id="name">
       </fieldset>
       <fieldset class="form-group">
@@ -12,7 +12,7 @@
         <input class="form-control" type="text" name="url" placeholder="Image url.." id="imgUrl">
       </fieldset>
       <fieldset class="form-group">
-        <label for="description">Camp description: </label>
+        <label for="description">Hero description: </label>
         <textarea class="form-control" name="description" id="description"></textarea>
       </fieldset>
       <input class="btn btn-dark" type="submit" value="Create">

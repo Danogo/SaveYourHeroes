@@ -1,5 +1,5 @@
 const express = require('express'),
-      Camp = require('../models/camp'),
+      Hero = require('../models/hero'),
       Comment = require('../models/comment'),
       //automatically looking for index.js file in folder
       middleware = require('../middleware'),
@@ -9,20 +9,20 @@ const express = require('express'),
 
 //NEW - display form for creating new comments
 router.get('/new', middleware.isLoggedIn, (req, res) => {
-    Camp.findById(req.params.id, (err, foundCamp) => {
-      if (err || !foundCamp) {
+    Hero.findById(req.params.id, (err, foundHero) => {
+      if (err || !foundHero) {
         console.log(err);
-        req.flash('error', 'Campground not found. You cannot add comment to non-existing campground');
+        req.flash('error', 'Hero not found. You cannot add comment to non-existing hero');
         res.redirect('back');
       } else {
-        res.render('comments/new', {camp: foundCamp});
+        res.render('comments/new', {hero: foundHero});
       }
     });
 });
 
 //CREATE - create new comment and redirect to show
 router.post('/', middleware.isLoggedIn, (req, res) => {
-  Camp.findById(req.params.id, (err, foundCamp) => {
+  Hero.findById(req.params.id, (err, foundHero) => {
     if (err) {
       console.log(err);
     } else {
@@ -36,15 +36,15 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
           createdComment.author.id = req.user._id;
           createdComment.author.username = req.user.username;
           createdComment.save();
-          //otherwise put comment into camp.comments array
-          foundCamp.comments.push(createdComment);
-          //and save that camp containing created comments
-          foundCamp.save();
-          console.log('Added coment to campground');
-          //redirect to /camps/:id route to show
-          //all details about that camp with new added comments
-          //could also be /camps/${foundCamp._id}
-          res.redirect(`/camps/${req.params.id}`);
+          //otherwise put comment into hero.comments array
+          foundHero.comments.push(createdComment);
+          //and save that hero containing created comments
+          foundHero.save();
+          console.log('Added coment to hero');
+          //redirect to /heroes/:id route to show
+          //all details about that hero with new added comments
+          //could also be /heroes/${foundHero._id}
+          res.redirect(`/heroes/${req.params.id}`);
         }
       });
     }
@@ -53,23 +53,23 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
 
 //EDIT - show form to edit existing comment
 router.get('/:comment_id/edit', middleware.checkCommentOwnership, (req, res) => {
-  //first check if campground exists (in case of url tinkering)
-  Camp.findById(req.params.id, (err, foundCamp) => {
-    if (err || !foundCamp) {
+  //first check if hero exists (in case of url tinkering)
+  Hero.findById(req.params.id, (err, foundHero) => {
+    if (err || !foundHero) {
       console.log(err);
-      req.flash('error', 'Campground not found. You cannot edit comment about non-existing campground');
+      req.flash('error', 'Hero not found. You cannot edit comment about non-existing hero');
       return res.redirect('back');
     }
     //find comment based on params in query string
     Comment.findById(req.params.comment_id, (err, foundComment) => {
       if (err) {
-        //if camp wasn't found
+        //if hero wasn't found
         console.log(err);
         //take user back to show page
         res.redirect('back');
       } else {
         //otherwise display form to edit particular comment
-        res.render('comments/edit', {campId: req.params.id, comment: foundComment});
+        res.render('comments/edit', {heroId: req.params.id, comment: foundComment});
       }
     });
   });
@@ -82,7 +82,7 @@ router.put('/:comment_id', middleware.checkCommentOwnership, (req, res) => {
       console.log(err);
       res.redirect('back');
     } else {
-      res.redirect(`/camps/${req.params.id}`);
+      res.redirect(`/heroes/${req.params.id}`);
     }
   });
 });
@@ -94,7 +94,7 @@ router.delete('/:comment_id', middleware.checkCommentOwnership, (req, res) => {
       console.log(err);
       res.redirect('back');
     } else {
-      res.redirect(`/camps/${req.params.id}`);
+      res.redirect(`/heroes/${req.params.id}`);
     }
   });
 });

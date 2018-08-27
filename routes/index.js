@@ -16,7 +16,7 @@ router.get('/register', (req, res) => {
   res.render('register');
 });
 
-//handling POST request for /register route, CREATE - create new user and redirect to camps
+//handling POST request for /register route, CREATE - create new user and redirect to heroes
 router.post('/register', (req, res) => {
   //create user account using register method from passport-local-mongoose -
   // - added through plugin in user model
@@ -27,7 +27,7 @@ router.post('/register', (req, res) => {
       //display proper message(coming from mongoose object) about occuring problem
       return res.render('register', {errorMsg: err.message});
     } //auth of a user, try to login (authenticate also invokes req.login under the hood)
-      passport.authenticate('local')(req, res, () => res.redirect("/camps"));
+      passport.authenticate('local')(req, res, () => res.redirect("/heroes"));
   })
 });
 
@@ -38,7 +38,7 @@ router.get('/login', (req, res) => {
 
 //handling POST request for /login route, login logic
 router.post('/login', passport.authenticate('local', {
-  successRedirect: '/camps',
+  successRedirect: '/heroes',
   failureRedirect: '/login'
 }), (req, res) => {});
 

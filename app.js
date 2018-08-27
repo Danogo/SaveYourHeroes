@@ -9,17 +9,19 @@ const express       = require('express'),
       mongoose      = require('mongoose'),
       passport      = require('passport'),
       LocalStrategy = require('passport-local'),
-      Camp          = require('./models/camp'),
+      Hero          = require('./models/hero'),
       Comment       = require('./models/comment'),
-      User          = require('./models/user');
-      // seedDB        = require('./seedDB');
+      User          = require('./models/user'),
+      seedDB        = require('./seedDB');
 
 // === Importing routes ===
-const campsRoutes    = require('./routes/camps'),
+const heroesRoutes    = require('./routes/heroes'),
       commentsRoutes = require('./routes/comments'),
       indexRoutes    = require('./routes/index');
 
 // === Setup ===
+// seed database with fake data
+seedDB();
 //set template engine to ejs
 app.set('view engine', 'ejs');
 //add middleware which parses x-ww-form-urlencoded
@@ -67,9 +69,9 @@ app.use((req, res, next) => {
 //==========
 //  ROUTES
 //==========
-app.use('/camps', campsRoutes);
+app.use('/heroes', heroesRoutes);
 app.use('/', indexRoutes);
-app.use('/camps/:id/comments', commentsRoutes);
+app.use('/heroes/:id/comments', commentsRoutes);
 
 //=== Starting the server ===
-app.listen(process.env.PORT || 3000, process.env.IP, () => console.log('The savethehero server has started...'));
+app.listen(process.env.PORT || 3069, process.env.IP, () => console.log('The savethehero server has started...'));

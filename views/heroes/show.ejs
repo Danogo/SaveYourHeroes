@@ -2,18 +2,18 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-6 show-info">
-      <img class="img-fluid show-img" src="<%= camp.imageURL %>" alt="Image of campground">
+      <img class="img-fluid show-img" src="<%= hero.imageURL %>" alt="Image of hero">
     </div>
     <div class="col-lg-6 show-info">
-      <h2><%= camp.name %></h2>
+      <h2><%= hero.name %></h2>
       <div class="lead">
-      <%= camp.description %>
+      <%= hero.description %>
       </div>
-      <p>Created by <%= camp.author.username %></p>
-      <% if (currentUser && camp.author.id.equals(currentUser._id)) { %>
+      <p>Created by <%= hero.author.username %></p>
+      <% if (currentUser && hero.author.id.equals(currentUser._id)) { %>
       <div class="btn-group" role="group" aria-label="Edit and delete buttons">
-        <a class="btn btn-warning" href="/camps/<%= camp._id %>/edit" role="button">Edit</a>
-        <form class="form d-inline-block " action="/camps/<%= camp._id %>?_method=DELETE" method="post">
+        <a class="btn btn-warning" href="/heroes/<%= hero._id %>/edit" role="button">Edit</a>
+        <form class="form d-inline-block " action="/heroes/<%= hero._id %>?_method=DELETE" method="post">
           <button class="btn btn-danger dlt-btn">Delete</button>
         </form>
       </div>
@@ -21,10 +21,10 @@
     </div>
   </div>
   <div class="show-info col-lg-6">
-    <p><a class="btn btn-primary" href="/camps/<%= camp._id %>/comments/new" role="button">Add new comment</a></p>
+    <p><a class="btn btn-primary" href="/heroes/<%= hero._id %>/comments/new" role="button">Add new comment</a></p>
     <hr>
     <ul class="list-unstyled">
-      <% camp.comments.forEach((comment) => { %>
+      <% hero.comments.forEach((comment) => { %>
         <li class="media comment mb-3">
           <div class="media-body">
             <h6 class="mt-0 mb-1 d-inline-block"><em><%= comment.author.username %></em></h6>
@@ -32,8 +32,8 @@
             <p class="mb-0 lead"><%= comment.text %></p>
             <% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
             <div class="btn-group" role="group" aria-label="Edit and delete buttons">
-              <a class="btn btn-warning btn-sm" href="/camps/<%= camp._id %>/comments/<%= comment._id %>/edit" role="button">Edit</a>
-              <form class="form d-inline-block " action="/camps/<%= camp._id %>/comments/<%= comment._id %>?_method=DELETE" method="post">
+              <a class="btn btn-warning btn-sm" href="/heroes/<%= hero._id %>/comments/<%= comment._id %>/edit" role="button">Edit</a>
+              <form class="form d-inline-block " action="/heroes/<%= hero._id %>/comments/<%= comment._id %>?_method=DELETE" method="post">
                 <button class="btn btn-danger btn-sm dlt-btn">Delete</button>
               </form>
             </div>

@@ -1,54 +1,54 @@
 const mongoose = require("mongoose");
-const Camp     = require("./models/camp");
+const Hero     = require("./models/hero");
 const Comment  = require("./models/comment");
 
 const data = [
     {
-        name: "Cloud's Rest",
-        imageURL: "https://images.unsplash.com/photo-1522205419828-f5b336fc3931?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=7b10bf52b7ea50de3250fe021944e57d&auto=format&fit=crop&w=500&q=60",
+        name: "My super friendly dog",
+        imageURL: "https://images.unsplash.com/photo-1532202802379-df93d543bac3?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=83d6daa0c0584b4ddf642f08db3f61cb&auto=format&fit=crop&w=2134&q=80",
         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
     },
     {
-        name: "Magic Forest",
-        imageURL: "https://images.unsplash.com/photo-1524261399568-56d8c862aaf8?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=eb319f95e1b6e9454e00526cbb0daaa4&auto=format&fit=crop&w=500&q=60",
+        name: "Spiderman",
+        imageURL: "https://images.unsplash.com/photo-1534809027769-b00d750a6bac?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=fb2712e6af187020db480d5f8af7a843&auto=format&fit=crop&w=634&q=80",
         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
     },
     {
-        name: "Paradise Hills",
-        imageURL: "https://images.unsplash.com/photo-1523612192437-66de9804ac3c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=59310f54610ead00fcc3d07732d5d473&auto=format&fit=crop&w=500&q=60",
+        name: "Deadpool",
+        imageURL: "https://images.unsplash.com/photo-1501432377862-3d0432b87a14?ixlib=rb-0.3.5&s=0333326b3ea1edab8e5bea9d701ce4e0&auto=format&fit=crop&w=634&q=80",
         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
     },
     {
-        name: "Sunset above the Sea",
-        imageURL: "https://images.unsplash.com/photo-1524410411359-24e9a0aa7076?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=00ae8ec957379832eb16396ddcb43c36&auto=format&fit=crop&w=500&q=60",
+        name: "Fighter",
+        imageURL: "https://images.unsplash.com/photo-1496979551903-46e46589a88b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=cda12b505afa1beb06e49d89014cbd65&auto=format&fit=crop&w=634&q=80",
         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
     },
     {
-        name: "Cloud's Rest",
-        imageURL: "https://images.unsplash.com/photo-1474139242267-eef6daa88e13?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=1784214629de074de845bf3726857d67&auto=format&fit=crop&w=500&q=60",
+        name: "Batman",
+        imageURL: "https://images.unsplash.com/photo-1531259683007-016a7b628fc3?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8f3a60bf9e8a9655e744221bcbb6574b&auto=format&fit=crop&w=634&q=80",
         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
     }
 ]
 
 const seedDB = () => {
-   //Remove all campgrounds
-   Camp.remove({}, err => {
+   //Remove all heroes
+   Hero.remove({}, err => {
         if(err){
             console.log(err);
         }
-        console.log("removed campgrounds!");
+        console.log("removed heroes!");
         Comment.remove({}, err => {
             if(err){
                 console.log(err);
             }
             console.log("removed comments!");
-             //add a few campgrounds
+             //add a few heroes
             data.forEach( seed => {
-                Camp.create(seed, (err, createdCamp) => {
+                Hero.create(seed, (err, createdHero) => {
                     if(err){
                         console.log(err)
                     } else {
-                        console.log("added a campground");
+                        console.log("added a hero");
                         //create a comment
                         Comment.create(
                             {
@@ -59,8 +59,8 @@ const seedDB = () => {
                                     console.log(err);
                                 } else {
                                     //add a few comments
-                                    createdCamp.comments.push(comment);
-                                    createdCamp.save();
+                                    createdHero.comments.push(comment);
+                                    createdHero.save();
                                     console.log("Created new comment");
                                 }
                             });

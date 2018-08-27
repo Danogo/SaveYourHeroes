@@ -1,0 +1,26 @@
+<% include ../partials/header %>
+<div class="container">
+  <header class="jumbotron bg-transparent">
+    <h1 class="display-4">Hello, <%= currentUser ? currentUser.username : 'super heroes' %>!</h1>
+    <p class="lead">Here you can see some awesome heroes or even add your own heroes and share their stories with others.</p>
+    <hr class="my-3">
+    <p>Go ahead and show us your favorite hero.</p>
+    <a class="btn btn-outline-primary btn-bg" href="/heroes/new" role="button">Create new hero</a>
+  </header>
+    <div class="row">
+        <% heroes.forEach((hero) => { %>
+          <div class="card col-sm-6 col-lg-4 mb-4">
+            <img src="<%= hero.imageURL %>" class="card-img-top" alt="Hero card image">
+            <div class="card-body">
+              <h5 class="card-title mb-2"><%= hero.name %></h5>
+              <p class="card-text"><%= hero.description.substring(0, 75)%>...</p>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-info btn-sm" href="/heroes/<%= hero._id %>" role="button">More Info</a>
+               <small class="text-muted">Last updated 3 mins ago</small>
+            </div>
+          </div>
+        <% }) %>
+    </div>
+</div>
+<% include ../partials/footer %>

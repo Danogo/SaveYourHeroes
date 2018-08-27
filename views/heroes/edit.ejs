@@ -1,0 +1,22 @@
+<% include ../partials/header %>
+<div class="container mt-4">
+  <h1 class="text-center">Edit <%= hero.name %></h1>
+  <div class="row justify-content-center py-4">
+    <form class="form col-md-3" action="/heroes/<%= hero._id %>?_method=PUT" method="post">
+      <fieldset class="form-group">
+        <label for="name">Hero name: </label>
+        <input class="form-control" type="text" name="hero[name]" value="<%= hero.name %>" id="name">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="imgUrl">Image URL: </label>
+        <input class="form-control" type="text" name="hero[imageURL]" value="<%= hero.imageURL %>" id="imgUrl">
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="description">Hero description: </label>
+        <textarea class="form-control" name="hero[description]" id="description"><%= hero.description %></textarea>
+      </fieldset>
+      <input class="btn btn-dark" type="submit" value="Confirm">
+    </form>
+  </div>
+</div>
+<% include ../partials/footer %>

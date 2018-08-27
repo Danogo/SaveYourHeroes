@@ -1,8 +1,8 @@
 <% include ../partials/header %>
 <div class="container mt-4">
-  <h1 class="text-center">Add new comment to <%= camp.name %></h1>
+  <h1 class="text-center">Add new comment to <%= hero.name %></h1>
   <div class="row justify-content-center py-4">
-    <form class="form col-md-3" action="/camps/<%= camp._id %>/comments" method="post">
+    <form class="form col-md-3" action="/heroes/<%= hero._id %>/comments" method="post">
       <fieldset class="form-group">
         <label for="content">Comment text: </label>
         <textarea class="form-control" name="comment[text]" id="content" placeholder="I love it! :)"></textarea>
