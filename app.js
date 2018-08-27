@@ -11,8 +11,8 @@ const express       = require('express'),
       LocalStrategy = require('passport-local'),
       Hero          = require('./models/hero'),
       Comment       = require('./models/comment'),
-      User          = require('./models/user'),
-      seedDB        = require('./seedDB');
+      User          = require('./models/user');
+      // seedDB        = require('./seedDB');
 
 // === Importing routes ===
 const heroesRoutes    = require('./routes/heroes'),
@@ -21,7 +21,7 @@ const heroesRoutes    = require('./routes/heroes'),
 
 // === Setup ===
 // seed database with fake data
-seedDB();
+// seedDB();
 //set template engine to ejs
 app.set('view engine', 'ejs');
 //add middleware which parses x-ww-form-urlencoded
